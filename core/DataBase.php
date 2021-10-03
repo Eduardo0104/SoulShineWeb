@@ -35,7 +35,6 @@ class DataBase {
         }
         return self::$instance;
     }
-
     /**
      * Connect to database
      * 
@@ -43,7 +42,7 @@ class DataBase {
      */
     private function connect(): void {
         $db = config('db');
-        $this->connection = new PDO("{$db['driver']}:host={$db['host']};dbname={$db['dbname']};charset=utf8", $db['user'], $db['pass'], [PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"]);
+        $this->connection = new PDO("{$db['driver']}:host={$db['host']};dbname={$db['dbname']};charset=utf8", $db['user'], $db['pass'],[PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"]);
         $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
@@ -78,18 +77,19 @@ class DataBase {
      * 
      * @return array|null query result
      */
-    public function getList(string $table, string $fields, array $condition = null, string $filter = null, string $order = null, string $limit = null): ?array {
+    public function getList(string $table, string $fields, array $condition = null, string $filter = null, string $order = null, string $limit = null) {
         $query = "SELECT $fields FROM $table";
 
         if($condition != null) {
             foreach($condition as $column => $value) {
                 $conditions[] = "$column = '$value'";
             }
-            $conditions = implode(' AND ', $conditions);    
+            $conditions = implode(' AND ', $conditions); 
         }
 
         if(!empty($condition)) {
             $query .= " WHERE $conditions";
+            
         }
         if(!empty($filter)) {
             $query .= " LIKE '$filter'";
