@@ -9,4 +9,4 @@ if(!empty($uri)) {
     $_GET['key'] = $uri;
 }
 
-require_once 'index.php';
+require_once 'router.php';
