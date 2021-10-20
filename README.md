@@ -1,4 +1,4 @@
 # Soul Shine Web
 
-Uma landing page utilizando o NoobFramework MVC.
+A landing page using NoobFramework MVC.
 
